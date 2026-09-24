@@ -1,5 +1,8 @@
 package co.edu.uniquindio.poo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hotel {
     private String nombreComercial;
     private String nit;
@@ -8,13 +11,15 @@ public class Hotel {
 
     private List<Huesped> listaHuespedes;
     private List<Habitacion> listaHabitaciones;
+
+    private String[][] matrizOcupacion;
     //constructor
-    public hotel (String nombreComercial, String nit, String direccion, String telefono ) {
+    public Hotel(String nombreComercial, String nit, String direccion, String telefono ) {
     this.nombreComercial=nombreComercial;
     this.nit=nit;
     this.direccion=direccion;
     this.telefono=telefono;
-    this.listaHabitaciones=new Arraylist<>();
+    this.listaHabitaciones=new ArrayList<>();
     this.listaHuespedes=new ArrayList<>();
     }
     //metodos
