@@ -37,12 +37,6 @@ public class Hotel {
     public void agregarHabitacion(Habitacion habitacion){
         this.listaHabitaciones.add(habitacion);
     }
-    public void realizarReserva(Reserva reserva){
-
-    }
-    public void cancelarReserva(String codigoReserva){
-
-    }
     //getters y setters
     public String getNombreComercial(){return nombreComercial;}
     public void setNombreComercial(String nombreComercial){this.nombreComercial=nombreComercial;}
