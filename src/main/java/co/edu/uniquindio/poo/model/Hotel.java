@@ -29,19 +29,19 @@ public class Hotel {
     }
 
 
-
+  // Metodo agregar huesped
     public void agregarHuesped(Huesped huesped) {
         if (huesped != null) {
             this.listaHuespedes.add(huesped);
         }
     }
-
+  // Metodo agregar habitacion
     public void agregarHabitacion(Habitacion habitacion) {
         if (habitacion != null) {
             this.listaHabitaciones.add(habitacion);
         }
     }
-
+ // Metodo para realizar reserva
     public void realizarReserva(Reserva reserva) {
         if (reserva != null) {
             this.listaReservas.add(reserva);
@@ -50,7 +50,7 @@ public class Hotel {
             }
         }
     }
-
+  // Metodo cancelar reserva
     public void cancelarReserva(String codigoReserva) {
         for (int i = 0; i < listaReservas.size(); i++) {
             Reserva r = listaReservas.get(i);
@@ -63,12 +63,12 @@ public class Hotel {
             }
         }
     }
-
+    // Metodo consultar huesped por telefono
     public boolean consultarNuevoHuespedPorTelefono(String telefono) {
         return consultarHuespedPorTelefono(telefono) != null;
     }
 
-
+  // Buscar habitacion por numero
     public Habitacion buscarHabitacionPorNumero(int numero) {
         for (int i = 0; i < listaHabitaciones.size(); i++) {
             Habitacion h = listaHabitaciones.get(i);
@@ -79,7 +79,7 @@ public class Hotel {
         return null;
     }
 
-
+    // Metodo consultar huesped por telefono
     public Huesped consultarHuespedPorTelefono(String telefono) {
         if (telefono == null) return null;
         for (int i = 0; i < listaHuespedes.size(); i++) {
@@ -92,7 +92,7 @@ public class Hotel {
     }
 
 
-
+    // Metodo contar habitaciones por estado
     public int contarHabitacionesPorEstado(String estado) {
         int contador = 0;
         for (int i = 0; i < listaHabitaciones.size(); i++) {
@@ -116,6 +116,8 @@ public class Hotel {
         return contarHabitacionesPorEstado("Mantenimiento");
     }
 
+
+    // Metodo habitacionMayorPrecio
     public Habitacion getHabitacionMayorPrecio() {
         if (listaHabitaciones.isEmpty()) return null;
         Habitacion mayor = listaHabitaciones.get(0);
@@ -127,7 +129,7 @@ public class Hotel {
         }
         return mayor;
     }
-
+ // Metodo para habitacion de menor precio
     public Habitacion getHabitacionMenorPrecio() {
         if (listaHabitaciones.isEmpty()) return null;
         Habitacion menor = listaHabitaciones.get(0);
@@ -139,7 +141,7 @@ public class Hotel {
         }
         return menor;
     }
-
+ // Reporte de disponibilidad de habitaciones
     public String generarReporteDisponibilidad() {
         String reporte = "=== CONTROL DE DISPONIBILIDAD DE HABITACIONES ===\n" +
                          "- Habitaciones Disponibles: " + getCantidadHabitacionesDisponibles() + "\n" +
