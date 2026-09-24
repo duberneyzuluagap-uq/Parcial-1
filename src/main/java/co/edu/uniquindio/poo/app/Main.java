@@ -7,7 +7,7 @@ import co.edu.uniquindio.poo.model.Reserva;
 import javax.swing.JOptionPane;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[]args){
 
         Hotel hotelStayPlus = new Hotel("StayPlus", "192.168.101.4",
                 "Av. Bolivar calle 4", "3181101943");
