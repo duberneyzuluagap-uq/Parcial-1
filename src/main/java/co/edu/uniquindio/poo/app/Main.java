@@ -1,9 +1,7 @@
 package co.edu.uniquindio.poo.app;
 
-
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         System.out.println("Hola");
-        }
     }
-
+}

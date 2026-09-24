@@ -68,4 +68,14 @@ public class Habitacion {
     public void setPrecioPorNoche(double precioPorNoche) {
         this.precioPorNoche = precioPorNoche;
     }
+
+    @Override
+    public String toString() {
+        return "Habitación " + numeroHabitacion + 
+               " [Tipo: " + tipoHabitacion + 
+               ", Piso: " + piso + 
+               ", Capacidad: " + capacidadMaxima + " pers." + 
+               ", Precio/Noche: $" + precioPorNoche + 
+               ", Estado: " + estado + "]";
+    }
 }
