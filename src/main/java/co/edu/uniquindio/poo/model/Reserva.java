@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.model;
 
+import java.util.ArrayList;
+
 public class Reserva {
 private String codigoReserva;
 private String fechaReserva;
@@ -8,6 +10,7 @@ private String estadoReserva;
 private String metodoPago;
 private double valorTotal;
 private byte cantidadHuespedes;
+private ArrayList<Habitacion> habitaciones;
 
 //contructor
 public Reserva(String codigoReserva, byte numeroNoches, byte cantidadHuespedes, double valorTotal, String estadoReserva, String metodoPago, String fechaReserva){
@@ -24,7 +27,12 @@ public Reserva(String codigoReserva, byte numeroNoches, byte cantidadHuespedes, 
 
     }
     public double calcularValorTotal(){
-    return this.valorTotal;
+    double sumaPreciosNoche = 0;
+     for (int i = 0;i<habitaciones.size();i++){
+         sumaPreciosNoche += habitaciones.get(i).getPrecioPorNoche();
+     }
+        valorTotal = sumaPreciosNoche*numeroNoches;
+    return valorTotal;
     }
     public boolean reservaActiva(){
     return "ACTIVA".equalsIgnoreCase(this.estadoReserva);
@@ -42,12 +50,12 @@ public Reserva(String codigoReserva, byte numeroNoches, byte cantidadHuespedes, 
     public double getValorTotal() {return valorTotal;}
     public void setValorTotal(double valorTotal){this.valorTotal=valorTotal;}
 
-    public byte getCantidadHuespedes(){cantidadHuespedes;}
-    public void setCantidadHuespedes(byte cantidadHuespedes){this.cantidadHuespedes=cantidadHuespedes}
+    public byte getCantidadHuespedes(){return cantidadHuespedes;}
+    public void setCantidadHuespedes(byte cantidadHuespedes){this.cantidadHuespedes=cantidadHuespedes;}
 
     public String getEstadoReserva() {return estadoReserva;}
     public void setEstadoReserva(String estadoReserva) {this.estadoReserva = estadoReserva;}
 
     public String getMetodoPago() {return metodoPago;}
-    public void setMetodoPago(String metodoPago){this.metodoPago=metodoPago}
+    public void setMetodoPago(String metodoPago){this.metodoPago=metodoPago;}
 }
