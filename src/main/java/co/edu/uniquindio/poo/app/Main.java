@@ -125,7 +125,7 @@ public class Main {
 
             hotelStayPlus.realizarReserva(nuevaReserva);
 
-            
+
 
 
             JOptionPane.showMessageDialog(null, "Reserva registrada a " + huesped.getNombre() +
