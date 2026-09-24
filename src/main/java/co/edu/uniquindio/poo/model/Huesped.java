@@ -112,6 +112,8 @@ public class Huesped {
         this.ciudad = ciudad;
     }
 
+
+
     @Override
     public String toString() {
         return nombre + " (Doc: " + documento + ", Tel: " + telefono + ", Ciudad: " + ciudad + ")";

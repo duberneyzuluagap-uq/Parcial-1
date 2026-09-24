@@ -28,9 +28,7 @@ public class Hotel {
         this.matrizOcupacion = new String[0][7];
     }
 
-    // ==========================================
-    // MÉTODOS DE GESTIÓN Y BÚSQUEDA BÁSICA
-    // ==========================================
+
 
     public void agregarHuesped(Huesped huesped) {
         if (huesped != null) {
@@ -70,16 +68,6 @@ public class Hotel {
         return consultarHuespedPorTelefono(telefono) != null;
     }
 
-    public Huesped buscarHuespedPorDocumento(String documento) {
-        if (documento == null) return null;
-        for (int i = 0; i < listaHuespedes.size(); i++) {
-            Huesped h = listaHuespedes.get(i);
-            if (h.getDocumento() != null && h.getDocumento().equals(documento.trim())) {
-                return h;
-            }
-        }
-        return null;
-    }
 
     public Habitacion buscarHabitacionPorNumero(int numero) {
         for (int i = 0; i < listaHabitaciones.size(); i++) {
@@ -91,9 +79,6 @@ public class Hotel {
         return null;
     }
 
-    // ==========================================
-    // PUNTO 1: CONSULTAR HUÉSPED POR TELÉFONO
-    // ==========================================
 
     public Huesped consultarHuespedPorTelefono(String telefono) {
         if (telefono == null) return null;
@@ -106,9 +91,7 @@ public class Hotel {
         return null;
     }
 
-    // ==========================================
-    // PUNTO 2: CONTROL DE DISPONIBILIDAD Y PRECIOS
-    // ==========================================
+
 
     public int contarHabitacionesPorEstado(String estado) {
         int contador = 0;
@@ -178,9 +161,7 @@ public class Hotel {
         return reporte;
     }
 
-    // ==========================================
-    // PUNTO 3: MATRIZ DE OCUPACIÓN DEL HOTEL
-    // ==========================================
+
 
     public void inicializarMatrizOcupacion(String[][] matriz) {
         this.matrizOcupacion = matriz;
@@ -264,9 +245,6 @@ public class Hotel {
         return texto;
     }
 
-    // ==========================================
-    // PUNTO 4: NÚMERO ESPECIAL DE RESERVA (CAPICÚA)
-    // ==========================================
 
     public List<Reserva> obtenerReservasEspeciales() {
         List<Reserva> especiales = new ArrayList<>();
@@ -279,9 +257,7 @@ public class Hotel {
         return especiales;
     }
 
-    // ==========================================
-    // PUNTO 5: INGRESOS DEL HOTEL POR FECHA
-    // ==========================================
+
 
     public double calcularIngresosPorFecha(String fechaConsultada) {
         if (fechaConsultada == null) return 0.0;
@@ -307,9 +283,29 @@ public class Hotel {
         return lista;
     }
 
-    // ==========================================
-    // GETTERS Y SETTERS
-    // ==========================================
+    public void actualizarTamanoMatrizOcupacion() {
+        int numHabitaciones = listaHabitaciones.size();
+        String[][] nuevaMatriz = new String[numHabitaciones][7];
+
+        for (int i = 0; i < numHabitaciones; i++) {
+            for (int j = 0; j < 7; j++) {
+                nuevaMatriz[i][j] = "D";
+            }
+        }
+        this.matrizOcupacion = nuevaMatriz;
+    }
+
+    public void cambiarEstadoOcupacionMatriz(int numeroHabitacion, int diaSemana, String estado) {
+        for (int i = 0; i < listaHabitaciones.size(); i++) {
+            if (listaHabitaciones.get(i).getNumeroHabitacion() == numeroHabitacion) {
+                if (diaSemana >= 0 && diaSemana < 7) {
+                    matrizOcupacion[i][diaSemana] = estado;
+                }
+                break;
+            }
+        }
+    }
+
 
     public String getNombreComercial() { return nombreComercial; }
     public void setNombreComercial(String nombreComercial) { this.nombreComercial = nombreComercial; }

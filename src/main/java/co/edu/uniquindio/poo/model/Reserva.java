@@ -62,7 +62,7 @@ public class Reserva {
         return this.valorTotal;
     }
 
-    // Punto 4: Algoritmo clásico para número capicúa
+    
     public boolean esEspecial() {
         if (codigoReserva == null || codigoReserva.equals("")) {
             return false;
