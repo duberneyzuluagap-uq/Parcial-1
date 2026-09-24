@@ -289,7 +289,11 @@ public class Hotel {
 
         for (int i = 0; i < numHabitaciones; i++) {
             for (int j = 0; j < 7; j++) {
-                nuevaMatriz[i][j] = "D";
+                if (matrizOcupacion != null && i < matrizOcupacion.length && matrizOcupacion[i][j] != null) {
+                    nuevaMatriz[i][j] = matrizOcupacion[i][j];
+                } else {
+                    nuevaMatriz[i][j] = "D";
+                }
             }
         }
         this.matrizOcupacion = nuevaMatriz;

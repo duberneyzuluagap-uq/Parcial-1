@@ -4,7 +4,6 @@ import co.edu.uniquindio.poo.model.Habitacion;
 import co.edu.uniquindio.poo.model.Hotel;
 import co.edu.uniquindio.poo.model.Huesped;
 import co.edu.uniquindio.poo.model.Reserva;
-
 import javax.swing.JOptionPane;
 
 public class Main {
@@ -13,11 +12,13 @@ public class Main {
         Hotel hotelStayPlus = new Hotel("StayPlus", "192.168.101.4",
                 "Av. Bolivar calle 4", "3181101943");
 
-        JOptionPane.showMessageDialog(null, "Bienvenido al sistema de manejo del hotel");
+        JOptionPane.showMessageDialog(null,
+                "Bienvenido al sistema de manejo del hotel");
 
         int opcion = 0;
 
         do {
+            // MENU HOTEL
             opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "--- MENU HOTEL STAYPLUS ---\n\n" +
                     "1. Registrar Huesped\n" +
                     "2. Registrar Habitacion\n" +
@@ -64,7 +65,7 @@ public class Main {
 
         } while (opcion != 9);
     }
-
+    // Metodo para agregar un huesped al hotel (CASE 1)
     public static void opcionAgregarHuesped(Hotel hotelStayPlus) {
         String doc = JOptionPane.showInputDialog("Documento del huesped:");
         String nom = JOptionPane.showInputDialog("Nombre completo:");
@@ -77,7 +78,7 @@ public class Main {
 
         JOptionPane.showMessageDialog(null, "Huesped guardado.");
     }
-
+        // Metodo para agregar una habitacion al hotel (CASE 2)
     public static void opcionAgregarHabitacion(Hotel hotelStayPlus) {
         int numHab = Integer.parseInt(JOptionPane.showInputDialog("Numero de habitacion:"));
         String tipo = JOptionPane.showInputDialog("Tipo (Individual, Doble, Suite):");
@@ -93,30 +94,45 @@ public class Main {
 
         JOptionPane.showMessageDialog(null, "Habitacion guardada.");
     }
+        // Metodo para agregar una reserva (CASE 3)
+        public static void opcionAgregarReserva(Hotel hotelStayPlus) {
+            String telHuesped = JOptionPane.showInputDialog("Telefono del huesped:");
+            Huesped huesped = hotelStayPlus.consultarHuespedPorTelefono(telHuesped);
 
-    public static void opcionAgregarReserva(Hotel hotelStayPlus) {
-        String telHuesped = JOptionPane.showInputDialog("Telefono del huesped:");
-        Huesped huesped = hotelStayPlus.consultarHuespedPorTelefono(telHuesped);
+            if (huesped == null) {
+                JOptionPane.showMessageDialog(null, "El huesped no existe. Debe registrarlo primero.");
+                return;
+            }
 
-        if (huesped == null) {
-            JOptionPane.showMessageDialog(null, "El huesped no existe.");
-            return;
+            int numHab = Integer.parseInt(JOptionPane.showInputDialog("Numero de habitacion a reservar:"));
+            Habitacion hab = hotelStayPlus.buscarHabitacionPorNumero(numHab);
+
+            if (hab == null) {
+                JOptionPane.showMessageDialog(null, "La habitacion ingresada no existe.");
+                return;
+            }
+
+            String codReserva = JOptionPane.showInputDialog("Codigo de reserva:");
+            String fechaReserva = JOptionPane.showInputDialog("Fecha (YYYY-MM-DD):");
+            byte noches = Byte.parseByte(JOptionPane.showInputDialog("Cantidad de noches:"));
+            byte cantHuespedes = Byte.parseByte(JOptionPane.showInputDialog("Cantidad de personas:"));
+            String estReserva = JOptionPane.showInputDialog("Estado (Pendiente, Confirmada, Finalizada):");
+            String metodoPago = JOptionPane.showInputDialog("Metodo de pago (Efectivo, Tarjeta, Transferencia):");
+
+            Reserva nuevaReserva = new Reserva(codReserva, fechaReserva, noches, cantHuespedes, estReserva, metodoPago, huesped);
+
+            nuevaReserva.agregarHabitacion(hab);
+
+            hotelStayPlus.realizarReserva(nuevaReserva);
+
+            
+
+
+            JOptionPane.showMessageDialog(null, "Reserva registrada a " + huesped.getNombre() +
+                    "\nHabitacion #" + hab.getNumeroHabitacion() + " asociada." +
+                    "\nValor Total: $" + nuevaReserva.getValorTotal());
         }
-
-        String codReserva = JOptionPane.showInputDialog("Codigo de reserva:");
-        String fechaReserva = JOptionPane.showInputDialog("Fecha (YYYY-MM-DD):");
-        byte noches = Byte.parseByte(JOptionPane.showInputDialog("Cantidad de noches:"));
-        byte cantHuespedes = Byte.parseByte(JOptionPane.showInputDialog("Cantidad de personas:"));
-        String estReserva = JOptionPane.showInputDialog("Estado (Pendiente, Confirmada, Finalizada):");
-        String metodoPago = JOptionPane.showInputDialog("Metodo de pago (Efectivo, Tarjeta, Transferencia):");
-
-        Reserva nuevaReserva = new Reserva(codReserva, fechaReserva, noches, cantHuespedes, estReserva, metodoPago, huesped);
-
-        hotelStayPlus.realizarReserva(nuevaReserva);
-
-        JOptionPane.showMessageDialog(null, "Reserva registrada a " + huesped.getNombre());
-    }
-
+        // Metodo para consultar Huesped por telefono (CASE 4)
     public static void opcionConsultarHuesped(Hotel hotelStayPlus) {
         String telConsulta = JOptionPane.showInputDialog("Telefono a buscar:");
         Huesped h = hotelStayPlus.consultarHuespedPorTelefono(telConsulta);
@@ -127,11 +143,11 @@ public class Main {
             JOptionPane.showMessageDialog(null, "No se encontro el huesped con telefono " + telConsulta);
         }
     }
-
+        // Metodo para ver disponibilidad (CASE 5)
     public static void opcionControlDisponibilidad(Hotel hotelStayPlus) {
         JOptionPane.showMessageDialog(null, hotelStayPlus.generarReporteDisponibilidad());
     }
-
+        // Metodo para matriz ocupacional (CASE 6)
     public static void opcionMatrizOcupacion(Hotel hotelStayPlus) {
         String subMenu = "--- MATRIZ DE OCUPACION ---\n" +
                 "1. Ver Matriz Semanal\n" +
@@ -157,9 +173,9 @@ public class Main {
             JOptionPane.showMessageDialog(null, reporte);
         }
     }
-
+    // Metodo para determinar reservas especiales (CASE 7)
     public static void opcionReservasCapicua(Hotel hotelStayPlus) {
-        String reporte = "RESERVAS ESPECIALES:\n\n";
+        String reporte = "Reservas Especiales:\n\n";
 
         if (hotelStayPlus.getListaReservas().size() == 0) {
             JOptionPane.showMessageDialog(null, "No hay reservas.");
@@ -177,7 +193,7 @@ public class Main {
 
         JOptionPane.showMessageDialog(null, reporte);
     }
-
+        // Metodo para ver ingresos por fecha (CASE 8)
     public static void opcionConsultarIngresos(Hotel hotelStayPlus) {
         String fecha = JOptionPane.showInputDialog("Fecha a buscar (YYYY-MM-DD):");
         double total = hotelStayPlus.calcularIngresosPorFecha(fecha);
