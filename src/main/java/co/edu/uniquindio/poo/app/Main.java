@@ -4,6 +4,7 @@ import co.edu.uniquindio.poo.model.Habitacion;
 import co.edu.uniquindio.poo.model.Hotel;
 import co.edu.uniquindio.poo.model.Huesped;
 import co.edu.uniquindio.poo.model.Reserva;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Main {
@@ -175,20 +176,17 @@ public class Main {
     }
     // Metodo para determinar reservas especiales (CASE 7)
     public static void opcionReservasCapicua(Hotel hotelStayPlus) {
-        String reporte = "Reservas Especiales:\n\n";
+        List<Reserva> especiales = hotelStayPlus.obtenerReservasEspeciales();
 
-        if (hotelStayPlus.getListaReservas().size() == 0) {
-            JOptionPane.showMessageDialog(null, "No hay reservas.");
+        if (especiales.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay reservas especiales.");
             return;
         }
 
-        for (int i = 0; i < hotelStayPlus.getListaReservas().size(); i++) {
-            Reserva r = hotelStayPlus.getListaReservas().get(i);
-            if (r.esEspecial()) {
-                reporte += "Reserva " + r.getCodigoReserva() + " es especial\n";
-            } else {
-                reporte += "Reserva " + r.getCodigoReserva() + " no es especial\n";
-            }
+        String reporte = "Reservas Especiales:\n\n";
+        for (int i = 0; i < especiales.size(); i++) {
+            Reserva r = especiales.get(i);
+            reporte += "Reserva " + r.getCodigoReserva() + " es especial\n";
         }
 
         JOptionPane.showMessageDialog(null, reporte);
